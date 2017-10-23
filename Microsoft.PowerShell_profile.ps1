@@ -1,6 +1,15 @@
 # Alias
 New-Alias which Get-Command
 
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+	Import-Module "$ChocolateyProfile"
+}
+
+# Modules
+Import-Module posh-git
+
 # Functions
 <#
 .SYNOPSIS
@@ -9,6 +18,7 @@ New-Alias which Get-Command
 function cdh {
 	Set-Location $HOME
 }
+
 <#
 .SYNOPSIS
 	Create new empty file or change file timestamp to now.
@@ -21,6 +31,7 @@ Function touch([string] $file) {
 		New-Item -ItemType File $file | Out-Null
 	}
 }
+
 <#
 .SYNOPSIS
 	Update all packages.
@@ -34,6 +45,7 @@ Function u {
 	gem update
 	gem clean
 }
+
 <#
 .SYNOPSIS
 	Gitignore
@@ -46,6 +58,7 @@ Function gig {
 	$params = $list -join ","
 	Invoke-WebRequest -Uri "https://www.gitignore.io/api/$params" | Select-Object -ExpandProperty content | Out-File -FilePath $(Join-Path -path $pwd -ChildPath ".gitignore") -Encoding UTF8
 }
+
 <#
 .SYNOPSIS
 	Reset IP address
@@ -56,6 +69,7 @@ Function Reset-IP
 	ipconfig /flushdns
 	ipconfig /renew
 }
+
 # Notepad++
 $NPPPath = 'C:\Program Files\Notepad++\notepad++.exe'
 <#
