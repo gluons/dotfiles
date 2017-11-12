@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Alias
+alias firefox-nightly='firefox-trunk'
+
 # Git Ignore
 function gi() {
 	curl -L -s https://www.gitignore.io/api/$@ > .gitignore
@@ -31,5 +34,6 @@ function uuu {
 # NODE_ENV
 export NODE_ENV="development"
 
-# Fake Firefox bin for Karma
+# Firefox
 export FIREFOX_DEVELOPER_BIN="$(which firefox-trunk)"
+export WEB_EXT_FIREFOX="$(which firefox-trunk)"
