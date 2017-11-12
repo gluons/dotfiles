@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Path
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
 # Git Ignore
 function gi() {
 	curl -L -s https://www.gitignore.io/api/$@ > .gitignore
