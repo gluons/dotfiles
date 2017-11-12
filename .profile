@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Alias
-alias firefox-nightly='firefox-trunk'
-
 # Git Ignore
 function gi() {
 	curl -L -s https://www.gitignore.io/api/$@ > .gitignore
