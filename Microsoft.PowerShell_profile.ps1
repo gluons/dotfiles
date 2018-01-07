@@ -8,7 +8,9 @@ if (Test-Path($ChocolateyProfile)) {
 }
 
 # Modules
-Import-Module posh-git
+if (Get-Module -ListAvailable -Name posh-git) {
+	Import-Module posh-git
+}
 
 # Functions
 <#
