@@ -36,7 +36,7 @@ Function touch([string] $file) {
 
 <#
 .SYNOPSIS
-Determine whether the given command exist.
+	Determine whether the given command exist.
 #>
 function Test-CommandExists ([string] $Command) {
 	return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
@@ -100,5 +100,7 @@ Function npp {
 		$Path
 	)
 
-	& $NPPPath $Path
+	if (Test-Path $NPPPath) {
+		& $NPPPath $Path
+	}
 }
