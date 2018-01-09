@@ -36,16 +36,30 @@ Function touch([string] $file) {
 
 <#
 .SYNOPSIS
+Determine whether the given command exist.
+#>
+function Test-CommandExists ([string] $Command) {
+	return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
+}
+
+<#
+.SYNOPSIS
 	Update all packages.
 #>
 Function u {
 	cdh
 	Clear-Host
-	npm update -g --verbose
-	apm upgrade --verbose --no-confirm
-	gem update --system
-	gem update
-	gem clean
+	if (Test-CommandExists npm) {
+		npm update -g --verbose
+	}
+	if (Test-CommandExists apm) {
+		apm upgrade --verbose --no-confirm
+	}
+	if (Test-CommandExists gem) {
+		gem update --system
+		gem update
+		gem clean
+	}
 }
 
 <#
