@@ -87,7 +87,6 @@ Function Reset-IP
 }
 
 # Notepad++
-$NPPPath = 'C:\Program Files\Notepad++\notepad++.exe'
 <#
 .SYNOPSIS
 	Run Notepad++
@@ -100,6 +99,7 @@ Function npp {
 		$Path
 	)
 
+	$NPPPath = 'C:\Program Files\Notepad++\notepad++.exe'
 	if (Test-Path $NPPPath) {
 		& $NPPPath $Path
 	}
