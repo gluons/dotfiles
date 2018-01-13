@@ -1,4 +1,5 @@
 # Alias
+New-Alias grep Select-String
 New-Alias which Get-Command
 
 # Chocolatey profile
