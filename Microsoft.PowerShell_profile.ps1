@@ -1,6 +1,7 @@
 # Alias
 New-Alias grep Select-String
 New-Alias which Get-Command
+New-Alias ln New-SymLink
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -26,13 +27,21 @@ function cdh {
 .SYNOPSIS
 	Create new empty file or change file timestamp to now.
 #>
-Function touch([string] $file) {
-	if(Test-Path $file) {
+Function touch ([string] $file) {
+	if (Test-Path $file) {
 		(Get-ChildItem $file).LastAccessTime = Get-Date
 		(Get-ChildItem $file).LastWriteTime = Get-Date
 	} else {
 		New-Item -ItemType File $file | Out-Null
 	}
+}
+
+<#
+.SYNOPSIS
+	Create a symbolic link to given target.
+#>
+function New-SymLink ([string] $Target,[string] $Link) {
+	New-Item -ItemType SymbolicLink -Path $Link -Value $Target
 }
 
 <#
@@ -69,7 +78,7 @@ Function u {
 #>
 Function gig {
 	param(
-		[Parameter(Mandatory=$true)]
+		[Parameter(Mandatory = $true)]
 		[string[]]$list
 	)
 	$params = $list -join ","
@@ -80,8 +89,7 @@ Function gig {
 .SYNOPSIS
 	Reset IP address
 #>
-Function Reset-IP
-{
+Function Reset-IP {
 	ipconfig /release
 	ipconfig /flushdns
 	ipconfig /renew
@@ -96,7 +104,7 @@ Function npp {
 	Param
 	(
 		# File path
-		[Parameter(ValueFromPipelineByPropertyName, Position=0)]
+		[Parameter(ValueFromPipelineByPropertyName, Position = 0)]
 		$Path
 	)
 
