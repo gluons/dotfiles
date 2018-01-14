@@ -3,16 +3,30 @@ New-Alias grep Select-String
 New-Alias which Get-Command
 New-Alias ln New-SymLink
 
+
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
 	Import-Module "$ChocolateyProfile"
 }
 
+
 # Modules
-if (Get-Module -ListAvailable -Name posh-git) {
+<#
+.SYNOPSIS
+	Determine whether the given module name exist.
+
+.PARAMETER ModuleName
+	Module name.
+#>
+function Test-ModuleExists ([Parameter(Mandatory = $true)][string] $ModuleName) {
+	return [bool](Get-Module -ListAvailable -Name $ModuleName)
+}
+
+if (Test-ModuleExists posh-git) {
 	Import-Module posh-git
 }
+
 
 # Functions
 <#
@@ -40,7 +54,7 @@ Function touch ([string] $file) {
 .SYNOPSIS
 	Create a symbolic link to given target.
 #>
-function New-SymLink ([string] $Target,[string] $Link) {
+function New-SymLink ([string] $Target, [string] $Link) {
 	New-Item -ItemType SymbolicLink -Path $Link -Value $Target
 }
 
