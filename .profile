@@ -1,3 +1,7 @@
+# Aliases
+alias npmlsg='npm ls -g --depth 0'
+alias npmls='npm ls --depth 0'
+
 # Git Ignore
 function gi() {
 	curl -L -s https://www.gitignore.io/api/$@ > .gitignore
