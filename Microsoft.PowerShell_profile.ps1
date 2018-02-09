@@ -68,6 +68,30 @@ function Test-CommandExists ([string] $Command) {
 
 <#
 .SYNOPSIS
+	List all global npm packages.
+#>
+function npmlsg {
+	if (Test-CommandExists npm) {
+		npm ls -g --depth 0
+	} else {
+		Write-Host -ForegroundColor Red -Object "npm command does not exist."
+	}
+}
+
+<#
+.SYNOPSIS
+	List all npm packages of current working directory.
+#>
+function npmls {
+	if (Test-CommandExists npm) {
+		npm ls --depth 0
+	} else {
+		Write-Host -ForegroundColor Red -Object "npm command does not exist."
+	}
+}
+
+<#
+.SYNOPSIS
 	Update all packages.
 #>
 Function u {
