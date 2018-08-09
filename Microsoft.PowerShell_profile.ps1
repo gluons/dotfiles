@@ -52,6 +52,14 @@ Function touch ([string] $file) {
 
 <#
 .SYNOPSIS
+	Copy current working directory to clipboard.
+#>
+function cpwd {
+	(Get-Location).Path | Set-Clipboard
+}
+
+<#
+.SYNOPSIS
 	Create a symbolic link to given target.
 #>
 function New-SymLink ([string] $Target, [string] $Link) {
