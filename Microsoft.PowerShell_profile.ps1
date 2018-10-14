@@ -39,6 +39,18 @@ function cdh {
 
 <#
 .SYNOPSIS
+	Change current directory to my-projects directory.
+#>
+function cdm {
+	$MyProjectsPath = Join-Path $HOME "./my-projects" -Resolve
+
+	if (Test-Path $MyProjectsPath) {
+		Set-Location $MyProjectsPath
+	}
+}
+
+<#
+.SYNOPSIS
 	Create new empty file or change file timestamp to now.
 #>
 Function touch ([string] $file) {
