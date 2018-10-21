@@ -42,11 +42,19 @@ function cdh {
 	Change current directory to my-projects directory.
 #>
 function cdm {
-	$MyProjectsPath = Join-Path $HOME "./my-projects" -Resolve
+	$MyProjectsPath = Join-Path $HOME './my-projects'
 
-	if (Test-Path $MyProjectsPath) {
-		Set-Location $MyProjectsPath
+	if (!(Test-Path $MyProjectsPath)) {
+		return
 	}
+
+	$MyProjectsPath = Resolve-Path $MyProjectsPath
+
+	if (Test-SymLink $MyProjectsPath -and (Get-Item $MyProjectsPath).Target.Count -gt 0) {
+		$MyProjectsPath = (Get-Item $MyProjectsPath).Target.Item(0)
+	}
+
+	Set-Location $MyProjectsPath
 }
 
 <#
@@ -84,6 +92,18 @@ function New-SymLink ([string] $Target, [string] $Link) {
 #>
 function Test-CommandExists ([string] $Command) {
 	return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
+}
+
+<#
+.SYNOPSIS
+	Determine whether the given is symbolic link.
+#>
+function Test-SymLink([string] $Path) {
+	if (!(Test-Path $Path)) {
+		return $false
+	}
+
+	return (Get-Item $Path).LinkType -eq 'SymbolicLink'
 }
 
 <#
