@@ -80,6 +80,14 @@ function cpwd {
 
 <#
 .SYNOPSIS
+	Open current working directory in Windows Explorer.
+#>
+function opwd {
+	Get-Location | Invoke-Item
+}
+
+<#
+.SYNOPSIS
 	Create a symbolic link to given target.
 #>
 function New-SymLink ([string] $Target, [string] $Link) {
