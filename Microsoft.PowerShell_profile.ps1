@@ -148,6 +148,9 @@ Function u {
 	if (Test-CommandExists npm) {
 		npm update -g --verbose
 	}
+	if (Test-CommandExists yarn) {
+		yarn global upgrade
+	}
 	if (Test-CommandExists apm) {
 		apm upgrade --verbose --no-confirm
 	}
