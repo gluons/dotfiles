@@ -26,6 +26,18 @@ function Test-ModuleExists ([Parameter(Mandatory = $true)][string] $ModuleName) 
 if (Test-ModuleExists posh-git) {
 	Import-Module posh-git
 }
+if (Test-ModuleExists git-aliases) {
+	Import-Module git-aliases -DisableNameChecking
+}
+if (Test-ModuleExists npm-completion) {
+	Import-Module npm-completion
+}
+if (Test-ModuleExists yarn-completion) {
+	Import-Module yarn-completion
+}
+if (Test-ModuleExists npm-upgrade) {
+	Import-Module npm-upgrade
+}
 
 
 # Functions
