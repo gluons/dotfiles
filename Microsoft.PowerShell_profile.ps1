@@ -26,6 +26,10 @@ function Test-ModuleExists ([Parameter(Mandatory = $true)][string] $ModuleName) 
 if (Test-ModuleExists posh-git) {
 	Import-Module posh-git
 }
+if (Test-ModuleExists oh-my-posh) {
+	Import-Module oh-my-posh
+	Set-Theme Paradox
+}
 if (Test-ModuleExists git-aliases) {
 	Import-Module git-aliases -DisableNameChecking
 }
