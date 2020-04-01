@@ -4,13 +4,6 @@ New-Alias which Get-Command
 New-Alias ln New-SymLink
 
 
-# Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-	Import-Module "$ChocolateyProfile"
-}
-
-
 # Modules
 <#
 .SYNOPSIS
@@ -41,6 +34,13 @@ if (Test-ModuleExists yarn-completion) {
 }
 if (Test-ModuleExists npm-upgrade) {
 	Import-Module npm-upgrade
+}
+
+
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+	Import-Module "$ChocolateyProfile"
 }
 
 
