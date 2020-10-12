@@ -21,7 +21,15 @@ if (Test-ModuleExists posh-git) {
 }
 if (Test-ModuleExists oh-my-posh) {
 	Import-Module oh-my-posh
-	Set-Theme Paradox
+
+	$OhMyPoshVersion = Get-Module oh-my-posh | Select-Object -ExpandProperty Version
+	$Version3 = [Version]::new('3.0.0')
+
+	if ($OhMyPoshVersion -lt $Version3) {
+		Set-Theme Paradox
+	} else {
+		Set-PoshPrompt -Theme jandedobbeleer
+	}
 }
 if (Test-ModuleExists git-aliases) {
 	Import-Module git-aliases -DisableNameChecking
