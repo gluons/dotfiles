@@ -67,7 +67,7 @@ function cdm {
 	$MyProjectsPath = Resolve-Path $MyProjectsPath
 
 	if (Test-SymLink $MyProjectsPath -and (Get-Item $MyProjectsPath).Target.Count -gt 0) {
-		$MyProjectsPath = (Get-Item $MyProjectsPath).Target.Item(0)
+		$MyProjectsPath = Get-Item $MyProjectsPath | Select-Object -ExpandProperty Target
 	}
 
 	Set-Location $MyProjectsPath
