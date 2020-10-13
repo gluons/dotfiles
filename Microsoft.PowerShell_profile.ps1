@@ -28,7 +28,7 @@ if (Test-ModuleExists oh-my-posh) {
 	if ($OhMyPoshVersion -lt $Version3) {
 		Set-Theme Paradox
 	} else {
-		Set-PoshPrompt -Theme jandedobbeleer
+		Set-PoshPrompt -Theme fish
 	}
 }
 if (Test-ModuleExists git-aliases) {
