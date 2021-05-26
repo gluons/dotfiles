@@ -1,3 +1,8 @@
+# Encoding
+$PSDefaultParameterValues['*:Encoding'] = 'utf8'
+
+[Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 # Alias
 New-Alias grep Select-String
 New-Alias which Get-Command
