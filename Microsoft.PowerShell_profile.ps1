@@ -8,8 +8,7 @@ New-Alias grep Select-String
 New-Alias which Get-Command
 New-Alias ln New-SymLink
 
-
-# Modules
+# Important functions
 <#
 .SYNOPSIS
 	Determine whether the given module name exist.
@@ -21,20 +20,17 @@ function Test-ModuleExists ([Parameter(Mandatory = $true)][string] $ModuleName) 
 	return [bool](Get-Module -ListAvailable -Name $ModuleName)
 }
 
+<#
+.SYNOPSIS
+	Determine whether the given command exist.
+#>
+function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
+	return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
+}
+
+# Modules
 if (Test-ModuleExists posh-git) {
 	Import-Module posh-git
-}
-if (Test-ModuleExists oh-my-posh) {
-	Import-Module oh-my-posh
-
-	$OhMyPoshVersion = Get-Module oh-my-posh | Select-Object -ExpandProperty Version
-	$Version3 = [Version]::new('3.0.0')
-
-	if ($OhMyPoshVersion -lt $Version3) {
-		Set-Theme Paradox
-	} else {
-		Set-PoshPrompt -Theme star
-	}
 }
 if (Test-ModuleExists git-aliases) {
 	Import-Module git-aliases -DisableNameChecking
@@ -56,6 +52,21 @@ if (Test-Path($ChocolateyProfile)) {
 	Import-Module "$ChocolateyProfile"
 }
 
+# Prompt
+if (Test-CommandExists starship) { # Starship
+	Invoke-Expression (&starship init powershell)
+} elseif (Test-ModuleExists oh-my-posh) { # Oh My Posh
+	Import-Module oh-my-posh
+
+	$OhMyPoshVersion = Get-Module oh-my-posh | Select-Object -ExpandProperty Version
+	$Version3 = [Version]::new('3.0.0')
+
+	if ($OhMyPoshVersion -lt $Version3) {
+		Set-Theme Paradox
+	} else {
+		Set-PoshPrompt -Theme star
+	}
+}
 
 # Functions
 <#
@@ -121,14 +132,6 @@ function opwd {
 #>
 function New-SymLink ([string] $Target, [string] $Link) {
 	New-Item -ItemType SymbolicLink -Path $Link -Value $Target
-}
-
-<#
-.SYNOPSIS
-	Determine whether the given command exist.
-#>
-function Test-CommandExists ([string] $Command) {
-	return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
 <#
