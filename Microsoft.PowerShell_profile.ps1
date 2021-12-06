@@ -55,6 +55,15 @@ if (Test-Path($ChocolateyProfile)) {
 # Prompt
 if (Test-CommandExists starship) { # Starship
 	Invoke-Expression (&starship init powershell)
+
+	# https://github.com/microsoft/terminal/issues/3158#issuecomment-967199838
+	$script:oldPrompt = $function:prompt
+
+	function prompt {
+		$pp = $pwd.ProviderPath
+		Write-Host -NoNewline "$([char]27)]9;9;`"$pp`"$([char]7)"
+		& $script:oldPrompt
+	}
 } elseif (Test-ModuleExists oh-my-posh) { # Oh My Posh
 	Import-Module oh-my-posh
 
