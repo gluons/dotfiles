@@ -82,7 +82,7 @@ if (Test-CommandExists eza) {
 	Remove-Alias -Name ls -ErrorAction Ignore
 
 	function ls {
-		eza -l --icons=always
+		eza -l --icons=always @args
 	}
 }
 
