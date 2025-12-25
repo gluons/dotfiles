@@ -15,12 +15,6 @@ function u {
 	if [ -x "$(command -v npm)" ]; then
 		npm update -g
 	fi
-	if [ -x "$(command -v yarn)" ]; then
-		yarn global upgrade
-	fi
-	if [ -x "$(command -v apm)" ]; then
-		apm upgrade --verbose --no-confirm
-	fi
 	if [ -x "$(command -v gem)" ]; then
 		gem update --system
 		gem update
