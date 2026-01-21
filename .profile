@@ -36,3 +36,7 @@ function uuu {
 
 # NODE_ENV
 export NODE_ENV="development"
+
+# Source update-discord.sh
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-${(%):-%x}}")" && pwd)"
+source "$SCRIPT_DIR/update-discord.sh"
